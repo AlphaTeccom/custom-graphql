@@ -35,7 +35,9 @@ class CustomGraphql implements ResolverInterface
         $output['username'] = $args['username'];
         $output['password'] = $args['password'];
         $output['fieldtype'] = $args['fieldtype'];
+
+        // Careful with DB and File-System Operations. You should check user-rights first!
       
-        return $output ;
+        return $output;
     }
 }
