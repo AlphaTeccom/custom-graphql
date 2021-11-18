@@ -1,13 +1,24 @@
-#Custom Module
 type Query
 {
-    CustomGraphql (
-        productId: Int @doc(description: "Product ID")
-        websiteId: Int = 1 @doc (description: "Website Id")
-    ): CustomGraphqlOutput @resolver(class: "Atbs\\Graphql\\Model\\Resolver\\CustomGraphql") @doc(description:"Custom Module Datapassing")
+    brand (
+        sku: String @doc(description: "Product ID")
+        attributeCode: String = "brand" @doc(description: "Attribute Code")
+        language: String @doc(description: "Language")
+    ): BrandOutput @resolver(class: "Atbs\\Graphql\\Model\\Resolver\\BrandGraphql") @doc(description:"Datapassing for brand query")
+
+    visibility (
+        sku: String @doc(description: "Product ID")
+        language: String @doc(description: "Language")
+    ): VisibilityOutput @resolver(class: "Atbs\\Graphql\\Model\\Resolver\\VisibilityGraphql") @doc(description:"Datapassing for visibility query")
 }
-type CustomGraphqlOutput
+
+type BrandOutput
 {
     code: String
     value: String
+}
+
+type VisibilityOutput
+{
+    visibility: String
 }
