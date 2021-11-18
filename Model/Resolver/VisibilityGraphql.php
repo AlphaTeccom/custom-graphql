@@ -36,7 +36,6 @@ class VisibilityGraphql implements ResolverInterface
         
         // Set graphql query params
         $sku = $args['sku'];
-        $attributeCode = $args['attributeCode'];
         $language = $args['language'];
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
