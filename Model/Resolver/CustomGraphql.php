@@ -26,15 +26,14 @@ class CustomGraphql implements ResolverInterface
         array $value = null,
         array $args = null)
     {
-        if (!isset($args['username']) || !isset($args['password']) || !isset($args['fieldtype'])||
-            empty($args['username']) || empty($args['password']) || empty($args['fieldtype']))
+        if (!isset($args['productId']) || empty($args['productId']))
         {
             throw new GraphQlInputException(__('Invalid parameter list.'));
         }
         $output = [];
-        $output['username'] = $args['username'];
-        $output['password'] = $args['password'];
-        $output['fieldtype'] = $args['fieldtype'];
+        $output['productId'] = $args['productId'];
+        $output['code'] = "Code";
+        $output['value'] = "Value";
 
         // Careful with DB and File-System Operations. You should check user-rights first!
       

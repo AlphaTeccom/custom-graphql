@@ -2,15 +2,12 @@
 type Query
 {
     CustomGraphql (
-        username: String @doc(description: "Email Address/Mobile Number")
-        password: String @doc(description: "Password")
-        fieldtype: String @doc(description: "Field Type")
+        productId: Int @doc(description: "Product ID")
         websiteId: Int = 1 @doc (description: "Website Id")
     ): CustomGraphqlOutput @resolver(class: "Atbs\\Graphql\\Model\\Resolver\\CustomGraphql") @doc(description:"Custom Module Datapassing")
 }
 type CustomGraphqlOutput
 {
-    username: String
-    password: String
-    fieldtype: String
+    code: String
+    value: String
 }
