@@ -26,6 +26,8 @@ class BrandGraphql implements ResolverInterface
         array $value = null,
         array $args = null)
     {
+
+        // COULD BE HANDLED WITH DEPENDENCY-INJECTION!
         if (!isset($args['sku']) || empty($args['sku']) || !isset($args['attributeCode']) || empty($args['attributeCode']))
         {
             throw new GraphQlInputException(__('Invalid parameter'));
@@ -39,27 +41,37 @@ class BrandGraphql implements ResolverInterface
         $attributeCode = $args['attributeCode'];
         $language = $args['language'];
 
+        // COULD / SHOULD BE HANDLED WITH DEPENDENCY-INJECTION!
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
         $productRepo = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
 
         // Select product per sku
         $product = $productRepo->get($sku);
 
-        // Decleare StoreID var
+        // Declare StoreID var
         $storeId;
         
         // Switch-case selects storeId per language param
         switch ($language) {
             case "DE":
+            case "de":
+            case "deutsch":
+            case "german":
                 $storeId = 1;
               break;
             case "FR":
+            case "fr":
+            case "french":
                 $storeId = 2;
               break;
-              case "IT":
+            case "IT":
+            case "it":
+            case "italian":
                 $storeId = 3;
               break;
             case "EN":
+            case "en":
+            case "english":
                 $storeId = 4;
               break;
             default:

@@ -26,6 +26,7 @@ class VisibilityGraphql implements ResolverInterface
         array $value = null,
         array $args = null)
     {
+        // COULD BE HANDLED WITH DEPENDENCY-INJECTION!
         if (!isset($args['sku']) || empty($args['sku']))
         {
             throw new GraphQlInputException(__('Invalid parameter'));
@@ -38,31 +39,41 @@ class VisibilityGraphql implements ResolverInterface
         $sku = $args['sku'];
         $language = $args['language'];
 
+        // COULD / SHOULD BE HANDLED WITH DEPENDENCY-INJECTION!
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
         $productRepo = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
 
         // Select product per sku
         $product = $productRepo->get($sku);
 
-        // Decleare StoreID var
+        // Declare StoreID var
         $storeId;
         
         // Switch-case selects storeId per language param
         switch ($language) {
             case "DE":
-                $storeId = 1;
-              break;
-            case "FR":
-                $storeId = 2;
-              break;
+              case "de":
+              case "deutsch":
+              case "german":
+                  $storeId = 1;
+                break;
+              case "FR":
+              case "fr":
+              case "french":
+                  $storeId = 2;
+                break;
               case "IT":
-                $storeId = 3;
-              break;
-            case "EN":
-                $storeId = 4;
-              break;
-            default:
-                $storeId = 0;
+              case "it":
+              case "italian":
+                  $storeId = 3;
+                break;
+              case "EN":
+              case "en":
+              case "english":
+                  $storeId = 4;
+                break;
+              default:
+                  $storeId = 0;
         }
 
         // Set code for specific language. Should be selected per language param
