@@ -27,7 +27,7 @@ class BrandGraphql implements ResolverInterface
         array $args = null)
     {
 
-        // COULD BE HANDLED WITH DEPENDENCY-INJECTION!
+        // Check parameters
         if (!isset($args['sku']) || empty($args['sku']) || !isset($args['attributeCode']) || empty($args['attributeCode']))
         {
             throw new GraphQlInputException(__('Invalid parameter'));
